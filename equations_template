@@ -1,0 +1,5 @@
+{number}x {character} {number} = {number}
+{number}x = {number}
+{number}x {character} {number} = 0
+{number} {character} {number}x = {number}
+{number} {character} {number} = {number}x
