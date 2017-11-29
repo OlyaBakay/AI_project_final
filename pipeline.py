@@ -1,6 +1,5 @@
+from GenerateData import text_image_trial
 from GenerateEquations import generate_equations
-
-from creating_data.GenerateData import text_image_trial
 
 
 def gen_pics_from_equation():
