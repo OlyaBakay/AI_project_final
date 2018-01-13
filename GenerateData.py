@@ -18,7 +18,7 @@ def text_to_image(source_path, final_path, source_label_path=None, final_label_p
 
 
 def img_creator(equations, eq_path, labels=None, lab_path=None):
-    font = ImageFont.truetype("FreeMono.ttf", 28, encoding="unic")
+    font = ImageFont.truetype("FreeMono.ttf", 14, encoding="unic")
     counter = 0
     # l = max(list(map(font.getsize, equations)))
     labels_map = {}
@@ -26,11 +26,11 @@ def img_creator(equations, eq_path, labels=None, lab_path=None):
     for unicode_text in equations:
         # create a blank canvas with extra space between lines
         # canvas = Image.new('RGB', (l[0] + 20, l[1] + 20), "white")
-        canvas = Image.new('RGB', (200, 50), "white")
+        canvas = Image.new('RGB', (75, 15), "white")
 
         # draw the text onto the text canvas, and use black as the text color
         draw = ImageDraw.Draw(canvas)
-        draw.text((10, 10), unicode_text, 'black', font)
+        draw.text((0, 0), unicode_text, 'black', font)
 
         # saves img with diff names
         name = eq_path + "/eq_{}.jpeg".format(counter)

@@ -23,7 +23,8 @@ def generate_equations(amount):
 
 def create_equation(template, file, file_label, file_label_binary):
 
-    characters = ["+", "-", "*", "/"]
+    # characters = ["+", "-", "*", "/"]
+    characters = ["+", "-"]
     count = template.count("{number}")
     count += template.count("{character}")
     allowed_numbers = list(range(-99, 100))
