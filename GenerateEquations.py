@@ -33,19 +33,17 @@ def create_equation(template, file, file_label, file_label_binary):
     for number in range(count):
         random_number = random.choice(allowed_numbers)
         random_character = random.choice(characters)
+        random_number = str(random_number)
+        equation = equation.replace("{number}", random_number, 1)
         equation = equation.replace("{character}", random_character, 1)
-        equation = equation.replace("{number}", str(random_number), 1)
     equation = equation.replace("- -", "+ ")
     equation = equation.replace("+ -", "- ")
 
     file.write(equation.split('=')[0])
     file.write("\n")
     check = np.random.choice([0, 1], p=[0.5, 0.5])
-    # check = random.randint(0, 1)
     if check == 1: file_label.write(solve_eq(equation))
-    else:
-        # wrong_answer = random.randint(-100, 100)
-        file_label.write(str(random.randint(-100, 100)))
+    else: file_label.write(str(random.randint(-100, 100)))
     file_label.write("\n")
     file_label_binary.write(str(check))
     file_label_binary.write("\n")

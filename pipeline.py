@@ -11,5 +11,5 @@ def gen_pics_from_equation():
 
 
 if __name__ == '__main__':
-    generate_equations(20000)
+    generate_equations(5000)
     gen_pics_from_equation()
