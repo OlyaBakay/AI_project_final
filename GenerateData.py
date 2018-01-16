@@ -53,7 +53,7 @@ def img_creator_ans(equations, eq_path):
     counter = 0
     for unicode_text in equations:
         photo = np.zeros(shape=(28, 165)).fill(250)
-        cv2.putText(photo, unicode_text, (0, 24), cv2.FONT_ITALIC, 1, 0, 2)
+        cv2.putText(photo, unicode_text, (80, 24), cv2.FONT_ITALIC, 1, 0, 2)
         name = eq_path + "/eq_{}.jpeg".format(counter)
         cv2.imwrite(name, photo)
         counter += 1
