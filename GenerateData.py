@@ -31,7 +31,8 @@ def img_creator_eq(equations, eq_path, labels=None, lab_path=None):
     counter = 0
     labels_map = {}
     for unicode_text in equations:
-        photo = np.zeros(shape=(28, 165)).fill(250)
+        photo = np.zeros(shape=(28, 165))
+        photo.fill(250)
         parts = unicode_text.split(" ")
         parts[0] = parts[0].replace("x", "")
         parts.insert(1, "x")
