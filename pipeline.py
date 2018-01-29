@@ -3,10 +3,10 @@ from GenerateEquations import generate_equations
 
 
 def gen_pics_from_equation():
-    # generates pics1 of equations
+    # generates pics of the equations
     text_to_image('./data/train.txt', "./pics/data", "./data/binary_labels.txt", "./pics/binary_labels.json")
 
-    # generates pics1 of the answers
+    # generates pics of the answers
     text_to_image('./data/text_label.txt', "./pics/labels")
 
 
