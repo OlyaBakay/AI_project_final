@@ -15,10 +15,9 @@ def generate_equations(amount):
     file_label = open("./data/text_label.txt", "w")
     file_label_binary = open("./data/binary_labels.txt", "w")
     for i in range(amount):
-        # create_equation(random.choice(templates).rstrip())
+        # create_equation(random.choice(templates).rstrip(), file, file_label, file_label_binary)
         create_equation(templates[2].rstrip(), file, file_label, file_label_binary)
-    file.close()
-    file_label.close()
+    file, file_label, file_label_binary.close()
 
 
 def create_equation(template, file, file_label, file_label_binary):

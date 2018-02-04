@@ -1,20 +1,7 @@
 import cv2
 import numpy as np
-import json
+import pandas as pd
 import os
-
-
-def text_to_image(source_path, final_path, source_label_path=None, final_label_path=None):
-    remove_files(final_path)
-
-    with open(source_path) as text_file:
-        data_lines = [l.rstrip() for l in text_file.readlines()]
-    if source_label_path and final_label_path:
-        with open(source_label_path) as text_file:
-            label_lines = [l.rstrip() for l in text_file.readlines()]
-        img_creator_eq(data_lines, final_path, label_lines, final_label_path)
-    else:
-        img_creator_ans(data_lines, final_path)
 
 
 def remove_files(folder):
@@ -27,9 +14,23 @@ def remove_files(folder):
             print(e)
 
 
-def img_creator_eq(equations, eq_path, labels=None, lab_path=None):
+def text_to_image(source_path, final_path, source_label_path=None, final_label_path=None):
+    remove_files(final_path)
+
+    with open(source_path) as text_file:
+        data_lines = [l.rstrip() for l in text_file.readlines()]
+
+    if source_label_path and final_label_path:
+        with open(source_label_path) as text_file:
+            label_lines = [l.rstrip() for l in text_file.readlines()]
+        img_creator_eq(data_lines, final_path, label_lines, final_label_path)
+    else:
+        img_creator_ans(data_lines, final_path)
+
+
+def img_creator_eq(equations, eq_path, labels, lab_path):
     counter = 0
-    labels_map = {}
+    labels_list = []
     for unicode_text in equations:
         photo = np.zeros(shape=(28, 165))
         photo.fill(250)
@@ -42,15 +43,17 @@ def img_creator_eq(equations, eq_path, labels=None, lab_path=None):
         cv2.putText(photo, parts[3], (120, 24), cv2.FONT_ITALIC, 1, 0, 2)
         name = eq_path + "/eq_{}.jpeg".format(counter)
         cv2.imwrite(name, photo)
-        if labels and lab_path:
-            labels_map[name] = int(labels[counter])
+        labels_list.append([name, unicode_text, int(labels[counter]), ])
         counter += 1
-    if labels and lab_path:
-        with open(lab_path, 'w') as file:
-            file.write(json.dumps(labels_map))
+
+    df = pd.DataFrame(labels_list, columns=['EquationNumber', 'Equation', 'IsCorrectAnswer'])
+    df.to_csv(lab_path)
 
 
 def img_creator_ans(equations, eq_path):
+    df = pd.read_csv('./pics/info.csv',  index_col=0)
+    df['Answer'] = equations
+    df.to_csv('./pics/info.csv')
     counter = 0
     for unicode_text in equations:
         photo = np.zeros(shape=(28, 165))
