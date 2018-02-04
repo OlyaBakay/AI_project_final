@@ -43,7 +43,7 @@ def img_creator_eq(equations, eq_path, labels, lab_path):
         cv2.putText(photo, parts[3], (120, 24), cv2.FONT_ITALIC, 1, 0, 2)
         name = eq_path + "/eq_{}.jpeg".format(counter)
         cv2.imwrite(name, photo)
-        labels_list.append([name, unicode_text, int(labels[counter]), ])
+        labels_list.append(["eq_{}.jpeg".format(counter), unicode_text, int(labels[counter]), ])
         counter += 1
 
     df = pd.DataFrame(labels_list, columns=['EquationNumber', 'Equation', 'IsCorrectAnswer'])
