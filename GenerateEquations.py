@@ -13,14 +13,12 @@ def generate_equations(amount):
         templates = file.readlines()
     file = open("./data/train.txt", "w")
     file_label = open("./data/text_label.txt", "w")
-    file_label_binary = open("./data/binary_labels.txt", "w")
     for i in range(amount):
-        # create_equation(random.choice(templates).rstrip(), file, file_label, file_label_binary)
-        create_equation(templates[2].rstrip(), file, file_label, file_label_binary)
-    file, file_label, file_label_binary.close()
+        create_equation(templates[2].rstrip(), file, file_label)
+    file, file_label.close()
 
 
-def create_equation(template, file, file_label, file_label_binary):
+def create_equation(template, file, file_label):
 
     # characters = ["+", "-", "*", "/"]
     characters = ["+", "-"]
@@ -40,12 +38,13 @@ def create_equation(template, file, file_label, file_label_binary):
 
     file.write(equation.split('=')[0])
     file.write("\n")
-    check = np.random.choice([0, 1], p=[0.5, 0.5])
-    if check == 1: file_label.write(solve_eq(equation))
-    else: file_label.write(str(random.randint(-100, 100)))
+    file_label.write(solve_eq(equation))
+    # check = np.random.choice([0, 1], p=[0.5, 0.5])
+    # if check == 1: file_label.write(solve_eq(equation))
+    # else: file_label.write(str(random.randint(-100, 100)))
     file_label.write("\n")
-    file_label_binary.write(str(check))
-    file_label_binary.write("\n")
+    # file_label_binary.write(str(check))
+    # file_label_binary.write("\n")
     return equation
 
 

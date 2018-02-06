@@ -4,12 +4,12 @@ from GenerateEquations import generate_equations
 
 def gen_pics_from_equation():
     # generates pics of the equations
-    text_to_image('./data/train.txt', "./pics/data", "./data/binary_labels.txt", "./pics/info.csv")
+    text_to_image('./data/train.txt', "./pics/data", "./pics/info.csv")
 
     # generates pics of the answers
     text_to_image('./data/text_label.txt', "./pics/labels")
 
 
 if __name__ == '__main__':
-    generate_equations(100)
+    generate_equations(10000)
     gen_pics_from_equation()

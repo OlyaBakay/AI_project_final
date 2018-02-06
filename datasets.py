@@ -16,7 +16,7 @@ class ImageDataset(data.Dataset):
         self.transform = transform
         self.eq_images = []
         self.an_images = []
-        self.data_labels = []
+        # self.data_labels = []
         self.answers = []
 
         eq_filenames = os.listdir(eq_path)
@@ -32,7 +32,7 @@ class ImageDataset(data.Dataset):
 
         with open(csv_path) as f:
             df = pd.read_csv(f)
-            self.data_labels = df["IsCorrectAnswer"]
+            # self.data_labels = df["IsCorrectAnswer"]
             self.answers = df["Answer"]
 
     def __len__(self):
@@ -51,9 +51,10 @@ class ImageDataset(data.Dataset):
         an_image_sq = an_image.squeeze()
 
         image = torch.stack([eq_image_sq, an_image_sq])
-        label = self.data_labels[index]
+        # label = self.data_labels[index]
         answer = self.answers[index].astype(np.float32)
-        return image, label, eq_image, an_image, answer
+        # return image, label, eq_image, an_image, answer
+        return image, eq_image, an_image, answer
 
 
 if __name__ == "__main__":
@@ -70,4 +71,4 @@ if __name__ == "__main__":
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
 
-    image, label, eq_image, an_image, answer = train_dataset[0]
+    image, eq_image, an_image, answer = train_dataset[0]
