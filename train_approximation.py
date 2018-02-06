@@ -33,7 +33,7 @@ def train(use_cuda=False):
 
     for epoch in range(num_of_epochs):
         # Training
-        for i, (_, _, X, y_true) in enumerate(train_loader):
+        for i, (_, X, _, y_true) in enumerate(train_loader):
             X, y_true = Variable(X), Variable(y_true)
             if use_cuda:
                 X, y_true = X.cuda(), y_true.cuda()
