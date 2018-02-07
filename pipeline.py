@@ -1,13 +1,11 @@
-from GenerateData import text_to_image
+from GenerateData import read_eq_data, read_an_data
 from GenerateEquations import generate_equations
 
 
 def gen_pics_from_equation():
     # generates pics of the equations
-    text_to_image('./data/train.txt', "./pics/data", "./pics/info.csv")
-
-    # generates pics of the answers
-    text_to_image('./data/text_label.txt', "./pics/labels")
+    read_eq_data('./data/equations.txt', "./data/pics/data", "./data/binary_labels.txt", "./data/info.csv")
+    read_an_data('./data/answers.txt', "./data/pics/labels")
 
 
 if __name__ == '__main__':

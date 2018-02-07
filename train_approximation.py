@@ -10,12 +10,13 @@ from models.approximation_net import ApproxNet
 
 
 def train(use_cuda=False):
-    data = "./pics/data"
-    labels = "./pics/labels"
-    csv_path = "./pics/info.csv"
+
+    data = "./data/pics/data"
+    labels = "./data/pics/labels"
+    csv_path = "./data/info.csv"
 
     batch_size = 100
-    num_of_epochs = 20
+    num_of_epochs = 100
 
     train_dataset = ImageDataset(data, labels, csv_path, lower_bound=0, upper_bound=6000)
     test_dataset = ImageDataset(data, labels, csv_path, lower_bound=6000, upper_bound=10000)
@@ -33,7 +34,8 @@ def train(use_cuda=False):
 
     for epoch in range(num_of_epochs):
         # Training
-        for i, (_, X, _, y_true) in enumerate(train_loader):
+
+        for i, (_, _, X, _, y_true) in enumerate(train_loader):
             X, y_true = Variable(X), Variable(y_true)
             if use_cuda:
                 X, y_true = X.cuda(), y_true.cuda()
@@ -52,7 +54,7 @@ def train(use_cuda=False):
         # Testing
         correct = np.array([])
         predicted = np.array([])
-        for _, _, X, y_true in test_loader:
+        for _,_, X, _, y_true in test_loader:
             X, y_true = Variable(X), Variable(y_true)
             if use_cuda:
                 X, y_true = X.cuda(), y_true.cuda()
